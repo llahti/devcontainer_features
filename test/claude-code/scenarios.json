@@ -1,0 +1,20 @@
+{
+  "python_image": {
+    "image": "mcr.microsoft.com/devcontainers/python:3.12",
+    "features": {
+      "claude-code": {}
+    }
+  },
+  "plain_debian": {
+    "image": "debian:12",
+    "features": {
+      "claude-code": {}
+    }
+  },
+  "pinned_version": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "claude-code": { "version": "2.1.293" }
+    }
+  }
+}

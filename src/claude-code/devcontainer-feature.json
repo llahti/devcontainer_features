@@ -1,0 +1,29 @@
+{
+  "id": "claude-code",
+  "version": "1.0.0",
+  "name": "Claude Code (native, no Node.js)",
+  "description": "Installs the Claude Code native binary on Debian-based images and gives each project a private state volume.",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Claude Code version to install: 'latest', 'stable', or an exact version such as '2.0.1'."
+    }
+  },
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/claude-state",
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "mounts": [
+    {
+      "source": "claude-state-${devcontainerId}",
+      "target": "/claude-state",
+      "type": "volume"
+    }
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": ["anthropic.claude-code"]
+    }
+  }
+}
