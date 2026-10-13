@@ -47,10 +47,11 @@ if [ ! -x "$src" ]; then
 fi
 install -m 0755 "$src" /usr/local/bin/claude
 
-# Private state dir. A fresh named volume inherits this ownership from the image.
+# Private state dir. A fresh named volume inherits this ownership/mode from the image.
+# World-writable + sticky: the remote user's UID can be remapped at container start
+# (updateRemoteUserUID), so ownership set at build time can't be relied on.
 mkdir -p "$STATE_DIR"
-chown "$USERNAME": "$STATE_DIR"
-chmod 700 "$STATE_DIR"
+chmod 1777 "$STATE_DIR"
 
 # Smoke test
 claude --version
