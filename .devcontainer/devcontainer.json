@@ -1,0 +1,13 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker": {},
+    "ghcr.io/devcontainers/features/node": {}
+  },
+  "postCreateCommand": "npm install -g @devcontainers/cli",
+  "mounts": [
+    // optional: keep the inner image cache across rebuilds
+    "source=features-dev-docker,target=/var/lib/docker,type=volume"
+  ]
+}
+
