@@ -1,0 +1,30 @@
+name: Release features
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "src/**"
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yaml
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write         # generated docs commit
+      packages: write         # push to ghcr.io
+      pull-requests: write    # docs PR
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish features to ghcr.io
+        uses: devcontainers/action@v1
+        with:
+          publish-features: "true"
+          base-path-to-features: "./src"
+          generate-docs: "true"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
